@@ -7,8 +7,6 @@ const useCanvasContext = (canvasRef) => {
         if (canvasRef) {
             const ctx = canvasRef.current.getContext("2d");
             ctx.imageSmoothingEnabled = false;
-            ctx.mozImageSmoothingEnabled = false;
-            ctx.webkitImageSmoothingEnabled = false;
             setContext(ctx);
         }
     }, [canvasRef]);

@@ -15,7 +15,6 @@ export class Player {
     _init() {
         const image = new Image();
         image.src = HeroSpritesheet;
-        image.style.imageRendering = "pixelated";
         image.onload = () => {
             this.context.drawImage(
                 image, 
