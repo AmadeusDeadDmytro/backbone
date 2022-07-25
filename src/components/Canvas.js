@@ -1,26 +1,52 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import useCanvasContext from "../hooks/useCanvasContext";
 import { Player } from "../instances/Player";
 
+import HeroSpritesheet from "../assets/characters/hero.png";
+
 const Canvas = () => {
+    const [player, setPlayer] = useState();
+    const [gameReady, setGameReady] = useState(false);
     const canvasRef = useRef();
     const context = useCanvasContext(canvasRef);
 
-    const draw = () => {
-        context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);			
-        const player = new Player({ context });
+    const drawFrame = () => {
+        context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);	 
+         
+        player.update();
+
+        setTimeout(() => {
+            window.requestAnimationFrame(drawFrame);
+        }, 1000 / 30);        
     };
 
     useEffect(() => {
         if (context) {
-            window.addEventListener("resize", draw);
-            draw();
+            // Instantiate a player
+            const heroSprite = new Image();
+            heroSprite.src = HeroSpritesheet;
+
+            console.log(heroSprite);
+    
+            heroSprite.onload = () => {
+                const pl = new Player({ context, sprite: heroSprite });
+                setPlayer(pl);
+
+                // Start game loop
+                setGameReady(true);   
+            };
+
+            
         }
-		
-        return () => {
-            window.removeEventListener("resize", draw);
-        };
-    }, [context, window]);
+    }, [context]);
+
+    useEffect(() => {
+        if (gameReady) {
+            setTimeout(() => {
+                window.requestAnimationFrame(drawFrame);
+            }, 1000 / 30);
+        }
+    }, [gameReady]);
 
     return	<canvas ref={canvasRef} width={window.innerWidth} height={window.innerHeight} />;
 };
