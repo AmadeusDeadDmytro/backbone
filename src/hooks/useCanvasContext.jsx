@@ -5,7 +5,11 @@ const useCanvasContext = (canvasRef) => {
 
     useEffect(() => {
         if (canvasRef) {
-            setContext(canvasRef.current.getContext("2d"));
+            const ctx = canvasRef.current.getContext("2d");
+            ctx.imageSmoothingEnabled = false;
+            ctx.mozImageSmoothingEnabled = false;
+            ctx.webkitImageSmoothingEnabled = false;
+            setContext(ctx);
         }
     }, [canvasRef]);
 
