@@ -3,8 +3,10 @@
 import { GAME_CONFIG } from "../helpers/constants";
 import Frame from "./Frame";
 
-const PLAYER_ANIMATION_LOOP = {
-    IDLE: [0, 1, 2]
+const animationConfig = {
+    idle: {
+        loop: [0, 1, 2]
+    }
 };
 
 export class Player extends Frame {
@@ -19,13 +21,13 @@ export class Player extends Frame {
         this.sprite  = config.sprite;        
         
         this.currentAnimSprite = 0;
-        this.animationState = PLAYER_ANIMATION_LOOP.IDLE;
+        this.animationState = animationConfig.idle;
     }
 
     update() {
         if (!this.sprite) return;
 
-        this.drawFrame(this.animationState[this.currentAnimSprite], 0, 0, window.innerHeight * 0.5);
+        this.#drawFrame(this.animationState.loop[this.currentAnimSprite], 0, 0, window.innerHeight * 0.5);
 
         this.increaseFrameCount();
         if (this.frameCount < 4) {
@@ -35,12 +37,12 @@ export class Player extends Frame {
         }        
         
         this.currentAnimSprite++;
-        if (this.currentAnimSprite >= this.animationState.length) {
+        if (this.currentAnimSprite >= this.animationState.loop.length) {
             this.currentAnimSprite = 0;
         }
     }
 
-    drawFrame(frameX, frameY, canvasX, canvasY) {   
+    #drawFrame(frameX, frameY, canvasX, canvasY) {   
         this.context.drawImage(
             this.sprite, 
             this.size.x * frameX, // crop start point x
