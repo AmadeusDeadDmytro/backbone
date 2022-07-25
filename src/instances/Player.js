@@ -8,6 +8,7 @@ const PLAYER_ANIMATION_LOOP = {
 };
 
 export class Player extends Frame {
+    
     constructor(config) {
         super();
         this.size = {
@@ -18,13 +19,13 @@ export class Player extends Frame {
         this.sprite  = config.sprite;        
         
         this.currentAnimSprite = 0;
-        this.animationState = "IDLE";
+        this.animationState = PLAYER_ANIMATION_LOOP.IDLE;
     }
 
     update() {
         if (!this.sprite) return;
 
-        this.drawFrame(PLAYER_ANIMATION_LOOP[this.animationState][this.currentAnimSprite], 0, 0, window.innerHeight * 0.5);
+        this.drawFrame(this.animationState[this.currentAnimSprite], 0, 0, window.innerHeight * 0.5);
 
         this.increaseFrameCount();
         if (this.frameCount < 4) {
@@ -34,7 +35,7 @@ export class Player extends Frame {
         }        
         
         this.currentAnimSprite++;
-        if (this.currentAnimSprite >= PLAYER_ANIMATION_LOOP[this.animationState].length) {
+        if (this.currentAnimSprite >= this.animationState.length) {
             this.currentAnimSprite = 0;
         }
     }
