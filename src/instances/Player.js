@@ -5,7 +5,11 @@ import Frame from "./Frame";
 
 const animationConfig = {
     idle: {
-        loop: [0, 1, 2]
+        loop: [0, 1, 2],
+        size: {
+            x: 43,
+            y: 91
+        }
     }
 };
 
@@ -13,10 +17,6 @@ export class Player extends Frame {
     
     constructor(config) {
         super();
-        this.size = {
-            x: 43,
-            y: 91
-        };
         this.context = config.context;
         this.sprite  = config.sprite;        
         
@@ -43,16 +43,18 @@ export class Player extends Frame {
     }
 
     #drawFrame(frameX, frameY, canvasX, canvasY) {   
+        const size = this.animationState.size;
+
         this.context.drawImage(
             this.sprite, 
-            this.size.x * frameX, // crop start point x
-            this.size.y * frameY, // crop start point y
-            this.size.x, // size cropped area x
-            this.size.y, // size cropped area y
+            size.x * frameX, // crop start point x
+            size.y * frameY, // crop start point y
+            size.x, // size cropped area x
+            size.y, // size cropped area y
             canvasX, // position image x
             canvasY, // position image y
-            this.size.x * GAME_CONFIG.PIXEL_SIZE, // size image x
-            this.size.y * GAME_CONFIG.PIXEL_SIZE, // size image y     
+            size.x * GAME_CONFIG.PIXEL_SIZE, // size image x
+            size.y * GAME_CONFIG.PIXEL_SIZE, // size image y     
         );  
     }
 }
