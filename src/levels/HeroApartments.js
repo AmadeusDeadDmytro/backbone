@@ -6,7 +6,7 @@ import HeroSpritesheet from "../assets/characters/hero.png";
 
 const FPS = 1000 / 30;
 
-const Canvas = () => {
+const HeroApartments = () => {
     const [player, setPlayer] = useState();
     const [gameReady, setGameReady] = useState(false);
     
@@ -54,4 +54,4 @@ const Canvas = () => {
     );
 };
 
-export default Canvas;
+export default HeroApartments;
