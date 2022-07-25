@@ -1,9 +1,9 @@
-import Canvas from "./components/Canvas";
+import HeroApartments from "./levels/HeroApartments";
 
 const App = () => {
     return (
         <>
-            <Canvas />
+            <HeroApartments />
         </>
     );
 };
