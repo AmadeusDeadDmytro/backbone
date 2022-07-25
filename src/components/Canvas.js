@@ -4,9 +4,12 @@ import { Player } from "../instances/Player";
 
 import HeroSpritesheet from "../assets/characters/hero.png";
 
+const FPS = 1000 / 30;
+
 const Canvas = () => {
     const [player, setPlayer] = useState();
     const [gameReady, setGameReady] = useState(false);
+    
     const canvasRef = useRef();
     const context = useCanvasContext(canvasRef);
 
@@ -17,7 +20,7 @@ const Canvas = () => {
 
         setTimeout(() => {
             window.requestAnimationFrame(drawFrame);
-        }, 1000 / 30);        
+        }, FPS);        
     };
 
     useEffect(() => {
@@ -25,18 +28,14 @@ const Canvas = () => {
             // Instantiate a player
             const heroSprite = new Image();
             heroSprite.src = HeroSpritesheet;
-
-            console.log(heroSprite);
-    
             heroSprite.onload = () => {
                 const pl = new Player({ context, sprite: heroSprite });
                 setPlayer(pl);
 
+                // TODO: Start a game loop when load all sprites, not only one
                 // Start game loop
                 setGameReady(true);   
             };
-
-            
         }
     }, [context]);
 
@@ -44,7 +43,7 @@ const Canvas = () => {
         if (gameReady) {
             setTimeout(() => {
                 window.requestAnimationFrame(drawFrame);
-            }, 1000 / 30);
+            }, FPS);
         }
     }, [gameReady]);
 

@@ -3,7 +3,9 @@
 import { GAME_CONFIG } from "../helpers/constants";
 import Frame from "./Frame";
 
-const PLAYER_ANIMATION_LOOP = [0, 1, 2];
+const PLAYER_ANIMATION_LOOP = {
+    IDLE: [0, 1, 2]
+};
 
 export class Player extends Frame {
     constructor(config) {
@@ -16,12 +18,13 @@ export class Player extends Frame {
         this.sprite  = config.sprite;        
         
         this.currentAnimSprite = 0;
+        this.animationState = "IDLE";
     }
 
     update() {
         if (!this.sprite) return;
 
-        this.drawFrame(PLAYER_ANIMATION_LOOP[this.currentAnimSprite], 0, 0, window.innerHeight * 0.5);
+        this.drawFrame(PLAYER_ANIMATION_LOOP[this.animationState][this.currentAnimSprite], 0, 0, window.innerHeight * 0.5);
 
         this.increaseFrameCount();
         if (this.frameCount < 4) {
@@ -31,7 +34,7 @@ export class Player extends Frame {
         }        
         
         this.currentAnimSprite++;
-        if (this.currentAnimSprite >= PLAYER_ANIMATION_LOOP.length) {
+        if (this.currentAnimSprite >= PLAYER_ANIMATION_LOOP[this.animationState].length) {
             this.currentAnimSprite = 0;
         }
     }
