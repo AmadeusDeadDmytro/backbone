@@ -3,25 +3,17 @@ import useCanvasContext from "../hooks/useCanvasContext";
 import { Player } from "../instances/Player";
 
 import HeroSpritesheet from "../assets/characters/hero.png";
+import useGameLoop from "../hooks/useGameLoop";
 
-const FPS = 1000 / 30;
 
 const HeroApartments = () => {
     const [player, setPlayer] = useState();
-    const [gameReady, setGameReady] = useState(false);
     
     const canvasRef = useRef();
     const context = useCanvasContext(canvasRef);
-
-    const drawFrame = () => {
-        context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);	 
-         
+    const gameLoop = useGameLoop(() => {
         player.update();
-
-        setTimeout(() => {
-            window.requestAnimationFrame(drawFrame);
-        }, FPS);        
-    };
+    }, context, canvasRef);
 
     useEffect(() => {
         if (context) {
@@ -32,20 +24,12 @@ const HeroApartments = () => {
                 const pl = new Player({ context, sprite: heroSprite });
                 setPlayer(pl);
 
-                // TODO: Start a game loop when load all sprites, not only one
                 // Start game loop
-                setGameReady(true);   
+                gameLoop.start(); 
             };
         }
     }, [context]);
 
-    useEffect(() => {
-        if (gameReady) {
-            setTimeout(() => {
-                window.requestAnimationFrame(drawFrame);
-            }, FPS);
-        }
-    }, [gameReady]);
 
     return	(
         <>
