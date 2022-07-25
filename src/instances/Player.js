@@ -1,7 +1,7 @@
 
 
 import { GAME_CONFIG } from "../helpers/constants";
-import Frame from "./Frame";
+import Frame from "./Base/Frame";
 
 const animationConfig = {
     idle: {
@@ -13,21 +13,20 @@ const animationConfig = {
     }
 };
 
-export class Player extends Frame {
-    
+export class Player extends Frame {    
     constructor(config) {
         super();
         this.context = config.context;
         this.sprite  = config.sprite;        
         
-        this.currentAnimSprite = 0;
+        this.currentAnimationIndex = 0;
         this.animationState = animationConfig.idle;
     }
 
     update() {
         if (!this.sprite) return;
 
-        this.#drawFrame(this.animationState.loop[this.currentAnimSprite], 0, 0, window.innerHeight * 0.5);
+        this.#drawFrame(this.animationState.loop[this.currentAnimationIndex], 0, 0, window.innerHeight * 0.5);
 
         this.increaseFrameCount();
         if (this.frameCount < 4) {
@@ -36,9 +35,10 @@ export class Player extends Frame {
             this.resetFrameCount();
         }        
         
-        this.currentAnimSprite++;
-        if (this.currentAnimSprite >= this.animationState.loop.length) {
-            this.currentAnimSprite = 0;
+        // TODO: Refactor
+        this.currentAnimationIndex++;
+        if (this.currentAnimationIndex >= this.animationState.loop.length) {
+            this.currentAnimationIndex = 0;
         }
     }
 
