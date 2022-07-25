@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useRef } from "react";
+import useCanvasContext from "./hooks/useCanvasContext";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    const canvasRef = useRef();
+    const context = useCanvasContext(canvasRef);
+
+    useEffect(() => {
+        if (context) {
+            context.fillStyle = "darkgray";
+            context.fillRect(0, 0, window.innerWidth, window.innerHeight);
+        }
+    }, [context]);
+
+    return (
+        <div>
+            <canvas ref={canvasRef} width={window.innerWidth} height={window.innerHeight} />
+        </div>
+    );
+};
 
 export default App;
