@@ -14,7 +14,6 @@ const Canvas = () => {
     useEffect(() => {
         if (context) {
             window.addEventListener("resize", draw);
-
             draw();
         }
 		

@@ -19,8 +19,8 @@ export class Player {
         image.onload = () => {
             this.context.drawImage(
                 image, 
-                0, 
-                window.innerHeight * 0.50, 
+                50, 
+                window.innerHeight * 0.40, 
                 41 * GAME_CONFIG.PIXEL_SIZE, 
                 89 * GAME_CONFIG.PIXEL_SIZE
             );
