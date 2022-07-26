@@ -16,18 +16,18 @@ const HeroApartments = () => {
     }, context, canvasRef);
 
     useEffect(() => {
-        if (context) {
-            // Instantiate a player
-            const heroSprite = new Image();
-            heroSprite.src = HeroSpritesheet;
-            heroSprite.onload = () => {
-                const pl = new Player({ context, sprite: heroSprite });
-                setPlayer(pl);
+        if (!context) return;
 
-                // Start game loop
-                gameLoop.start(); 
-            };
-        }
+        // Instantiate a player
+        const heroSprite = new Image();
+        heroSprite.src = HeroSpritesheet;
+        heroSprite.onload = () => {
+            const pl = new Player({ context, sprite: heroSprite });
+            setPlayer(pl);
+
+            // Start game loop
+            gameLoop.start(); 
+        };
     }, [context]);
 
 

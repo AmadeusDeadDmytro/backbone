@@ -13,11 +13,10 @@ const useGameLoop = (levelBody, context, canvasRef) => {
             window.requestAnimationFrame(drawFrame);
         }, FPS);        
     };
+	
     useEffect(() => {
         if (gameReady) {
-            setTimeout(() => {
-                window.requestAnimationFrame(drawFrame);
-            }, FPS);
+            window.requestAnimationFrame(drawFrame);
         }
     }, [gameReady]);
 
