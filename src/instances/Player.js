@@ -1,6 +1,4 @@
-
-
-import { GAME_CONFIG } from "../helpers/constants";
+import { normalize } from "../helpers/common";
 import Frame from "./Base/Frame";
 
 const animationConfig = {
@@ -60,8 +58,8 @@ export class Player extends Frame {
         this.#drawFrame(
             this.animationState.loop[this.currentAnimationIndex], 
             this.animationState.verticalCrop, 
-            50 + (this.animationState.horizontalOffset || 0), 
-            window.innerHeight * 0.5
+            400 + (this.animationState.horizontalOffset || 0), 
+            window.innerHeight * 0.45
         );
 
         this.increaseFrameCount();
@@ -102,8 +100,8 @@ export class Player extends Frame {
             size.y, // size cropped area y
             canvasX, // position image x
             canvasY, // position image y
-            size.x * GAME_CONFIG.PIXEL_SIZE, // size image x
-            size.y * GAME_CONFIG.PIXEL_SIZE, // size image y     
+            normalize(size.x), // size image x
+            normalize(size.y), // size image y     
         );  
     }
 }
