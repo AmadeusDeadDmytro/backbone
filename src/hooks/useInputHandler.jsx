@@ -14,7 +14,7 @@ const useInputHandler = (player) => {
 
     const handleInputDown = (e) => {
         e.preventDefault();
-        
+
         switch(e.key) {
         case "a":
             player.move(false);
