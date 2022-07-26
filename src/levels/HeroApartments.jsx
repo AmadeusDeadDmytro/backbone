@@ -4,6 +4,7 @@ import { Player } from "../instances/Player";
 
 import HeroSpritesheet from "../assets/characters/hero.png";
 import useGameLoop from "../hooks/useGameLoop";
+import useInputHandler from "../hooks/useInputHandler";
 
 
 const HeroApartments = () => {
@@ -14,6 +15,7 @@ const HeroApartments = () => {
     const gameLoop = useGameLoop(() => {
         player.update();
     }, context, canvasRef);
+    useInputHandler(player);
 
     useEffect(() => {
         if (!context) return;
@@ -21,7 +23,7 @@ const HeroApartments = () => {
         // Instantiate a player
         const heroSprite = new Image();
         heroSprite.src = HeroSpritesheet;
-        heroSprite.onload = () => {
+        heroSprite.onload = () => {         
             const pl = new Player({ context, sprite: heroSprite });
             setPlayer(pl);
 

@@ -4,12 +4,38 @@ import { GAME_CONFIG } from "../helpers/constants";
 import Frame from "./Base/Frame";
 
 const animationConfig = {
+    idleReverse: {
+        loop: [0, 1, 2],
+        size: {
+            x: 41,
+            y: 89
+        },
+        verticalCrop: 0,
+        horizontalOffset: -60
+    },
     idle: {
         loop: [0, 1, 2],
         size: {
-            x: 43,
-            y: 91
-        }
+            x: 41,
+            y: 89
+        },
+        verticalCrop: 90
+    },
+    idleDirectionalReverse: {
+        loop: [0, 1, 2],
+        size: {
+            x: 32,
+            y: 89
+        },
+        verticalCrop: 180
+    },
+    idleDirectional: {
+        loop: [0, 1, 2],
+        size: {
+            x: 32,
+            y: 89
+        },
+        verticalCrop: 270
     }
 };
 
@@ -19,14 +45,24 @@ export class Player extends Frame {
         this.context = config.context;
         this.sprite  = config.sprite;        
         
+        // Animation
         this.currentAnimationIndex = 0;
         this.animationState = animationConfig.idle;
-    }
 
+        // Extra
+        this.isRightDirection = true;
+        this.toIdleTimeout = null;
+    }
+    
     update() {
         if (!this.sprite) return;
-
-        this.#drawFrame(this.animationState.loop[this.currentAnimationIndex], 0, 0, window.innerHeight * 0.5);
+    
+        this.#drawFrame(
+            this.animationState.loop[this.currentAnimationIndex], 
+            this.animationState.verticalCrop, 
+            50 + (this.animationState.horizontalOffset || 0), 
+            window.innerHeight * 0.5
+        );
 
         this.increaseFrameCount();
         if (this.frameCount < 4) {
@@ -41,14 +77,27 @@ export class Player extends Frame {
             this.currentAnimationIndex = 0;
         }
     }
+    
+    move(right) {
+        this.isRightDirection = right;
+        this.animationState = right ? animationConfig.idleDirectional : animationConfig.idleDirectionalReverse;
+    }
+
+    startToIdleTimeout() {
+        if (this.toIdleTimeout) clearTimeout(this.toIdleTimeout);
+        
+        this.toIdleTimeout = setTimeout(() => {
+            this.animationState = this.isRightDirection ? animationConfig.idle : animationConfig.idleReverse;
+        }, 2000);
+    }
 
     #drawFrame(frameX, frameY, canvasX, canvasY) {   
         const size = this.animationState.size;
 
         this.context.drawImage(
             this.sprite, 
-            size.x * frameX, // crop start point x
-            size.y * frameY, // crop start point y
+            size.x * frameX + (this.currentAnimationIndex), // crop start point x
+            frameY, // crop start point y
             size.x, // size cropped area x
             size.y, // size cropped area y
             canvasX, // position image x
