@@ -41,7 +41,8 @@ export class Player extends Frame {
     constructor(config) {
         super();
         this.context = config.context;
-        this.sprite  = config.sprite;        
+        this.sprite  = config.sprite;       
+        this.world = config.world; 
         
         // Animation
         this.currentAnimationIndex = 0;
