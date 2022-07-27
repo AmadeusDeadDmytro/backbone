@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import useCanvasContext from "../hooks/useCanvasContext";
 import { Player } from "../instances/Player";
 
 import AppartmentsFront_1 from "../assets/apartments/appartments_front_1.png";
@@ -13,8 +12,7 @@ const HeroApartments = () => {
     const [frontSprite, setFrontSprite] = useState();
     
     const canvasRef = useRef();
-    const context = useCanvasContext(canvasRef);
-    const gameLoop = useGameLoop(() => {
+    const { context, ...gameLoop } = useGameLoop(() => {
         player.update();
         context.drawImage(
             frontSprite, 
@@ -23,7 +21,7 @@ const HeroApartments = () => {
             normalize(48), 
             normalize(70)
         );
-    }, context, canvasRef);
+    }, canvasRef);
     useInputHandler(player);
 
     useEffect(() => {
@@ -46,7 +44,6 @@ const HeroApartments = () => {
             };            
         };
     }, [context]);
-
 
     return	(
         <>

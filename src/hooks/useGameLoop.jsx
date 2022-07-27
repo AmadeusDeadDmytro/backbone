@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import useCanvasContext from "./useCanvasContext";
 
 const FPS = 1000 / 30;
-const useGameLoop = (levelBody, context, canvasRef) => {
+const useGameLoop = (levelBody, canvasRef) => {
     const [gameReady, setGameReady] = useState(false);
+    const context = useCanvasContext(canvasRef);
 
     const start = () => setGameReady(true);
 
@@ -20,7 +22,7 @@ const useGameLoop = (levelBody, context, canvasRef) => {
         }
     }, [gameReady]);
 
-    return { start };
+    return { start, context };
 };
 
 export default useGameLoop;
