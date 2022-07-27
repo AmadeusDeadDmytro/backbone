@@ -6,13 +6,11 @@ import HeroSpritesheet from "../assets/characters/hero.png";
 import { normalize } from "../helpers/common";
 import useGameLoop from "../hooks/useGameLoop";
 import useInputHandler from "../hooks/useInputHandler";
-import { Canvas } from "../instances/Canvas";
 import { World } from "../instances/World";
 
 const HeroApartments = () => {
     const [player, setPlayer] = useState();
     const [world, setWorld] = useState();
-    const [canvas, setCanvas] = useState();
 
     const [frontSprite, setFrontSprite] = useState();
     
@@ -20,7 +18,7 @@ const HeroApartments = () => {
     const { context, ...gameLoop } = useGameLoop(() => {
         player.update();
 
-        canvas.drawImage(
+        world.drawImage(
             frontSprite, 
             0, 
             canvasRef.current.height - normalize(frontSprite.height), 
@@ -35,7 +33,6 @@ const HeroApartments = () => {
 
         const w = new World({ context });
         setWorld(w);
-        setCanvas(new Canvas({ context, world: w }));
 
         const heroSprite = new Image();
         heroSprite.src = HeroSpritesheet;
