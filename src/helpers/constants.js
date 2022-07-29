@@ -1,3 +1,3 @@
 export const GAME_CONFIG = {
-    PIXEL_SIZE: 7
+    PIXEL_SIZE: 6.8
 };

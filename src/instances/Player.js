@@ -60,7 +60,7 @@ export class Player extends Frame {
             this.animationState.loop[this.currentAnimationIndex], 
             this.animationState.verticalCrop, 
             400 + (this.animationState.horizontalOffset || 0), 
-            window.innerHeight * 0.45
+            window.innerHeight * 0.38
         );
 
         this.increaseFrameCount();
@@ -101,8 +101,8 @@ export class Player extends Frame {
             size.y, // size cropped area y
             canvasX, // position image x
             canvasY, // position image y
-            normalize(size.x), // size image x
-            normalize(size.y), // size image y     
+            normalize(size.x) * 1.25, // size image x
+            normalize(size.y) * 1.25, // size image y     
         );  
     }
 }

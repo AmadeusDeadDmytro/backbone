@@ -1,3 +1,5 @@
+import { normalize } from "../helpers/common";
+
 export class World {
     constructor(config) {
         this.context = config.context;
@@ -14,6 +16,16 @@ export class World {
             posY + this.offsetY,
             scaleX,
             scaleY
+        );
+    }
+
+    drawFullfilledImage(image, canvasHeight) {
+        this.drawImage(
+            image,
+            0, 
+            canvasHeight - normalize(image.height), 
+            normalize(image.width), 
+            normalize(image.height)
         );
     }
 }
