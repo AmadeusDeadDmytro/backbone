@@ -22,7 +22,7 @@ const HeroApartments = () => {
         world.drawFullfilledImage(frontSprite, canvasRef.current.height);
     }, canvasRef);
 
-    useInputHandler(player);
+    useInputHandler(player, world);
 
     useEffect(() => {
         if (!context) return;

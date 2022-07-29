@@ -43,6 +43,10 @@ export class Player extends Frame {
         this.context = config.context;
         this.sprite  = config.sprite;       
         this.world = config.world; 
+
+        // Movement
+        this.offsetX = 0;
+        this.offsetY = 0;
         
         // Animation
         this.currentAnimationIndex = 0;
@@ -59,12 +63,12 @@ export class Player extends Frame {
         this.#drawFrame(
             this.animationState.loop[this.currentAnimationIndex], 
             this.animationState.verticalCrop, 
-            400 + (this.animationState.horizontalOffset || 0), 
+            400 + (this.animationState.horizontalOffset || 0) + this.offsetX, 
             window.innerHeight * 0.38
         );
 
         this.increaseFrameCount();
-        if (this.frameCount < 4) {
+        if (this.frameCount < 30) {
             return;
         } else {
             this.resetFrameCount();
@@ -80,6 +84,12 @@ export class Player extends Frame {
     move(right) {
         this.isRightDirection = right;
         this.animationState = right ? animationConfig.idleDirectional : animationConfig.idleDirectionalReverse;
+
+        if (right) {
+            this.offsetX += 15;
+        } else {
+            this.offsetX += -15;
+        }
     }
 
     startToIdleTimeout() {
