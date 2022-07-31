@@ -1,11 +1,13 @@
 import ANIMATION from "../animations/playerAnimationConfig";
 import { normalize } from "../helpers/common";
+import { classExtender } from "../helpers/core";
+import Animation from "./Base/Animation";
 import Frame from "./Base/Frame";
 
 const MOVEMENT_SPEED = 700;
 const ANIMATION_FRAME_SPEED = 10;
 
-export class Player extends Frame {    
+export class Player extends classExtender(Frame, Animation) {    
     constructor(config) {
         super();
         this.context = config.context;
@@ -46,9 +48,8 @@ export class Player extends Frame {
             this.move(passedTime);
         }
 
-        if (this.frameCount < ANIMATION_FRAME_SPEED) {   
-            return;
-        } else {
+        // TODO: Refactor this
+        if (this.frameCount >= ANIMATION_FRAME_SPEED) {   
             this.currentAnimationIndex++;
             if (this.currentAnimationIndex >= this.animationState.loop.length) {
                 this.currentAnimationIndex = 0;
