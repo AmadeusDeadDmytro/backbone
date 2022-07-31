@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import useCanvasContext from "./useCanvasContext";
 
-const useGameLoop = (update, canvasRef, isStop = false) => {
+const useGameLoop = (update, canvasRef) => {
     const [gameReady, setGameReady] = useState(false);
 
     const context = useCanvasContext(canvasRef);
@@ -13,11 +13,10 @@ const useGameLoop = (update, canvasRef, isStop = false) => {
         oldTimeStamp = timeStamp;
         context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);	          
         update(secondsPassed);
-        if (!isStop) {
-            window.requestAnimationFrame((t) => {
-                drawFrame(t, oldTimeStamp);
-            });      
-        } 
+        
+        window.requestAnimationFrame((t) => {
+            drawFrame(t, oldTimeStamp);
+        });   
     };
 	
     useEffect(() => {

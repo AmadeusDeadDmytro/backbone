@@ -37,7 +37,8 @@ const animationConfig = {
     }
 };
 
-const SPEED = 700;
+const MOVEMENT_SPEED = 700;
+const ANIMATION_FRAME_SPEED = 10;
 
 export class Player extends Frame {    
     constructor(config) {
@@ -80,7 +81,7 @@ export class Player extends Frame {
             this.move(passedTime);
         }
 
-        if (this.frameCount < 10) {   
+        if (this.frameCount < ANIMATION_FRAME_SPEED) {   
             return;
         } else {
             this.currentAnimationIndex++;
@@ -103,7 +104,7 @@ export class Player extends Frame {
     }
 
     move(time) {   
-        this.offsetX += ((this.isRightDirection ? SPEED : -SPEED) * time);
+        this.offsetX += ((this.isRightDirection ? MOVEMENT_SPEED : -MOVEMENT_SPEED) * time);
     }
 
     #startToIdleTimeout() {
