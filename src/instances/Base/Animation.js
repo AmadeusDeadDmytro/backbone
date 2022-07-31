@@ -9,7 +9,7 @@ export default (Base) => {
             };
         }
 
-        nextAnimation() {
+        nextAnimationSprite() {
             this.animation.index++;
             if (this.animation.index >= this.animation.state.loop.length) {
                 this.animation.index = 0;
