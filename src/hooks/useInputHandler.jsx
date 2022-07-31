@@ -17,10 +17,10 @@ const useInputHandler = (player, world) => {
 
         switch(e.key) {
         case "a":
-            player.move(false);
+            player.startMove(false);
             break;
         case "d":
-            player.move(true);
+            player.startMove(true);
             break;
         default:
             return;
@@ -33,7 +33,7 @@ const useInputHandler = (player, world) => {
         switch(e.key) {
         case "a":
         case "d":
-            player.startToIdleTimeout();
+            player.stopMove();
             break;
         default:
             return;

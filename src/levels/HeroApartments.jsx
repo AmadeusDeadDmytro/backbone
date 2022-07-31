@@ -16,13 +16,13 @@ const HeroApartments = () => {
     const [backSprite, setBackSprite] = useState();
     
     const canvasRef = useRef();
-    const { context, ...gameLoop } = useGameLoop(() => {
+    const { context, ...gameLoop } = useGameLoop((passedTime) => {
         world.drawFullfilledImage(backSprite, canvasRef.current.height);
-        player.update();
+        player.update(passedTime);
         world.drawFullfilledImage(frontSprite, canvasRef.current.height);
     }, canvasRef);
 
-    useInputHandler(player, world);
+    useInputHandler(player);
 
     useEffect(() => {
         if (!context) return;

@@ -37,6 +37,8 @@ const animationConfig = {
     }
 };
 
+const SPEED = 700;
+
 export class Player extends Frame {    
     constructor(config) {
         super();
@@ -47,6 +49,7 @@ export class Player extends Frame {
         // Movement
         this.offsetX = 0;
         this.offsetY = 0;
+        this.isMoving = false;
         
         // Animation
         this.currentAnimationIndex = 0;
@@ -57,7 +60,7 @@ export class Player extends Frame {
         this.toIdleTimeout = null;
     }
     
-    update() {
+    update(passedTime) {
         if (!this.sprite) return;
     
         this.#drawFrame(
@@ -68,31 +71,42 @@ export class Player extends Frame {
         );
 
         this.increaseFrameCount();
-        if (this.frameCount < 30) {
+
+        if (this.isMoving) {
+            if (this.toIdleTimeout)
+            {
+                clearTimeout(this.toIdleTimeout);
+            }
+            this.move(passedTime);
+        }
+
+        if (this.frameCount < 10) {   
             return;
         } else {
+            this.currentAnimationIndex++;
+            if (this.currentAnimationIndex >= this.animationState.loop.length) {
+                this.currentAnimationIndex = 0;
+            }
             this.resetFrameCount();
-        }        
-        
-        // TODO: Refactor
-        this.currentAnimationIndex++;
-        if (this.currentAnimationIndex >= this.animationState.loop.length) {
-            this.currentAnimationIndex = 0;
-        }
-    }
-    
-    move(right) {
-        this.isRightDirection = right;
-        this.animationState = right ? animationConfig.idleDirectional : animationConfig.idleDirectionalReverse;
-
-        if (right) {
-            this.offsetX += 15;
-        } else {
-            this.offsetX += -15;
-        }
+        }    
     }
 
-    startToIdleTimeout() {
+    startMove(isRight) {
+        this.isMoving = true;
+        this.isRightDirection = isRight;
+        this.animationState = isRight ? animationConfig.idleDirectional : animationConfig.idleDirectionalReverse;
+    }
+
+    stopMove(){
+        this.isMoving = false;
+        this.#startToIdleTimeout();
+    }
+
+    move(time) {   
+        this.offsetX += ((this.isRightDirection ? SPEED : -SPEED) * time);
+    }
+
+    #startToIdleTimeout() {
         if (this.toIdleTimeout) clearTimeout(this.toIdleTimeout);
         
         this.toIdleTimeout = setTimeout(() => {
