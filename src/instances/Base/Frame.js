@@ -1,16 +1,19 @@
+import { ANIMATION_FRAME_SPEED } from "../../helpers/constants";
+
 export default (Base) => {
     class Frame extends Base {
         constructor() {
             super();
-            this.frameCount = 0;
+            this.frame = {
+                count: 0
+            };
         }
-    
-        increaseFrameCount() {
-            this.frameCount++;
-        }
-    
-        resetFrameCount() {
-            this.frameCount = 0;
+
+        checkFrame(callback) {
+            if (this.frame.count >= ANIMATION_FRAME_SPEED) {   
+                callback();
+                this.frame.count = 0;
+            }
         }
     }
     return Frame;
