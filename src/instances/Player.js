@@ -1,6 +1,5 @@
 import ANIMATION from "../animations/playerAnimationConfig";
-import { normalize } from "../helpers/common";
-import { classExtender } from "../helpers/core";
+import { classExtender, normalize } from "../helpers/common";
 import Animation from "./Base/Animation";
 import Frame from "./Base/Frame";
 
