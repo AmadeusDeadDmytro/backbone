@@ -1,41 +1,6 @@
+import ANIMATION from "../animations/playerAnimationConfig";
 import { normalize } from "../helpers/common";
 import Frame from "./Base/Frame";
-
-const animationConfig = {
-    idleReverse: {
-        loop: [0, 1, 2],
-        size: {
-            x: 41,
-            y: 89
-        },
-        verticalCrop: 0,
-        horizontalOffset: -60
-    },
-    idle: {
-        loop: [0, 1, 2],
-        size: {
-            x: 41,
-            y: 89
-        },
-        verticalCrop: 90
-    },
-    idleDirectionalReverse: {
-        loop: [0, 1, 2],
-        size: {
-            x: 32,
-            y: 89
-        },
-        verticalCrop: 180
-    },
-    idleDirectional: {
-        loop: [0, 1, 2],
-        size: {
-            x: 32,
-            y: 89
-        },
-        verticalCrop: 270
-    }
-};
 
 const MOVEMENT_SPEED = 700;
 const ANIMATION_FRAME_SPEED = 10;
@@ -54,7 +19,7 @@ export class Player extends Frame {
         
         // Animation
         this.currentAnimationIndex = 0;
-        this.animationState = animationConfig.idle;
+        this.animationState = ANIMATION.idle;
 
         // Extra
         this.isRightDirection = true;
@@ -95,7 +60,7 @@ export class Player extends Frame {
     startMove(isRight) {
         this.isMoving = true;
         this.isRightDirection = isRight;
-        this.animationState = isRight ? animationConfig.idleDirectional : animationConfig.idleDirectionalReverse;
+        this.animationState = isRight ? ANIMATION.idleDirectional : ANIMATION.idleDirectionalReverse;
     }
 
     stopMove(){
@@ -111,7 +76,7 @@ export class Player extends Frame {
         if (this.toIdleTimeout) clearTimeout(this.toIdleTimeout);
         
         this.toIdleTimeout = setTimeout(() => {
-            this.animationState = this.isRightDirection ? animationConfig.idle : animationConfig.idleReverse;
+            this.animationState = this.isRightDirection ? ANIMATION.idle : ANIMATION.idleReverse;
         }, 2000);
     }
 
