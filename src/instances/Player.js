@@ -63,7 +63,7 @@ export class Player extends classExtender(Frame, Animation) {
         
         this.toIdleTimeout = setTimeout(() => {
             this.setAnimation("idle", !this.isRightDirection);
-        }, 2000);
+        }, 1000);
     }
 
     #drawFrame(frameX, frameY, canvasX, canvasY) {   
