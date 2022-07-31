@@ -62,7 +62,7 @@ export class Player extends classExtender(Frame, Animation) {
         if (this.toIdleTimeout) clearTimeout(this.toIdleTimeout);
         
         this.toIdleTimeout = setTimeout(() => {
-            this.setAnimation("idleDirectional", !this.isRightDirection);
+            this.setAnimation("idle", !this.isRightDirection);
         }, 2000);
     }
 
