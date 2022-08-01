@@ -8,12 +8,16 @@ import useGameLoop from "../hooks/useGameLoop";
 import useInputHandler from "../hooks/useInputHandler";
 import { World } from "../instances/World";
 
+// const { app } = window.require("@electron/remote");
+
 const HeroApartments = () => {
     const [player, setPlayer] = useState();
     const [world, setWorld] = useState();
 
     const [frontSprite, setFrontSprite] = useState();
     const [backSprite, setBackSprite] = useState();
+
+    // console.log(app);
     
     const canvasRef = useRef();
     const { context, ...gameLoop } = useGameLoop((passedTime) => {

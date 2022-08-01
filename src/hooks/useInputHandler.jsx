@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const useInputHandler = (player, world) => {
+const useInputHandler = (player) => {
     useEffect(() => {
         if (!player) return;
 

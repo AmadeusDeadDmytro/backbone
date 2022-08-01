@@ -2,23 +2,23 @@
 module.exports = {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "node": true
     },
     "extends": [
+        "plugin:react/recommended",
+        "plugin:react/jsx-runtime",
         "eslint:recommended",
-        "plugin:@typescript-eslint/recommended"
     ],
-    "parser": "@typescript-eslint/parser",
+    "parser": "@babel/eslint-parser",
     "parserOptions": {
         "ecmaVersion": 13,
-        "sourceType": "module"
+        "sourceType": "module",
+        "babelOptions": {
+            "presets": ["@babel/preset-react"]
+        },
     },
-    "plugins": [
-        "@typescript-eslint"
-    ],
     "rules": {
-        "@typescript-eslint/no-non-null-assertion": "off",
-        "@typescript-eslint/no-explicit-any": "off",
         "no-debugger": "warn",
         "indent": [
             "error",
