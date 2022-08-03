@@ -4,10 +4,10 @@ const useInputHandler = (player) => {
     useEffect(() => {
         if (!player) return;
 
-        window.addEventListener("keydown", handleInputDown);
+        window.addEventListener("keypress", handleInputDown);
         window.addEventListener("keyup", handleInputUp);
         return () => {
-            window.removeEventListener("keydown", handleInputDown);
+            window.removeEventListener("keypress", handleInputDown);
             window.removeEventListener("keyup", handleInputUp);
         };
     }, [player]);

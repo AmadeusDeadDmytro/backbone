@@ -6,6 +6,8 @@ function createWindow() {
     const window = new BrowserWindow({
         width: 1920,
         height: 1080,
+        resizable: false,
+        autoHideMenuBar: true,
         webPreferences: {
             nodeIntegration: true,
             enableRemoteModule: true
