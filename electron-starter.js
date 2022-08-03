@@ -8,13 +8,17 @@ function createWindow() {
         height: 1080,
         resizable: false,
         autoHideMenuBar: true,
+        fullscreenable: true,
         webPreferences: {
             nodeIntegration: true,
-            enableRemoteModule: true
+            enableRemoteModule: true,
+            contextIsolation: false
         }
     });
+
+    window.setResizable(false);
 
     window.loadURL("http://localhost:3000");
 }
 
-app.on("ready", createWindow);
+app.whenReady().then(createWindow);

@@ -1,4 +1,4 @@
-import HeroApartments from "./levels/HeroApartments";
+import HeroApartments from "./scenes/HeroApartments";
 
 const App = () => {
     return (
