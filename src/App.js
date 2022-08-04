@@ -1,9 +1,9 @@
-import HeroApartments from "./scenes/HeroApartments";
+import SceneManager from "./modules/SceneManager/SceneManager";
 
 const App = () => {
     return (
         <>
-            <HeroApartments />
+            <SceneManager/>
         </>
     );
 };
