@@ -3,12 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "main": "electron-starter.js",
-  "homepage": "https://AmadeusDeadDmytro.github.io/backbone-game",
+  "homepage": "./",
   "description": "ReactJS Game - noire detective",
   "author": "Dmytro Mazurenko",
   "scripts": {
-    "predeploy": "react-scripts build",
-    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "electron:serve": "concurrently -k \"cross-env BROWSER=none npm run start\" \"npm run electron:start\"",
