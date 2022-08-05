@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/backbone-game/static/css/main.187a6160.css",
+    "main.js": "/backbone-game/static/js/main.5b6984f0.js",
+    "static/media/appartments_back_1.png": "/backbone-game/static/media/appartments_back_1.53b070fdfdb799cd71ad.png",
+    "static/media/hero.png": "/backbone-game/static/media/hero.88c94e6ef6b23ad75985.png",
+    "index.html": "/backbone-game/index.html",
+    "main.187a6160.css.map": "/backbone-game/static/css/main.187a6160.css.map",
+    "main.5b6984f0.js.map": "/backbone-game/static/js/main.5b6984f0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.187a6160.css",
+    "static/js/main.5b6984f0.js"
+  ]
+}
