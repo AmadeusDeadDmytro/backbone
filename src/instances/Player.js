@@ -35,6 +35,7 @@ export class Player extends classExtender(Frame, Animation) {
         this.frame.count++;
         this.move(passedTime);
         this.checkFrame(() => this.nextAnimationFrame());
+
     }
 
     startMove(isRight) {

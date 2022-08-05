@@ -5,7 +5,9 @@ export default (Base) => {
             this.animation = {
                 index: 0,
                 state: config.idle,
-                config: config
+                config: config,
+                isReversed: false,
+                nextAnimation: null
             };
         }
 
@@ -13,6 +15,10 @@ export default (Base) => {
             this.animation.index++;
 
             if (this.animation.index >= this.animation.state.loop.length) {
+                if (this.animation.nextAnimation) {
+                    this.setAnimation(this.animation.nextAnimation, this.animation.isReversed);
+                    this.animation.nextAnimation = null;
+                }
                 this.animation.index = 0;
             }
         }
@@ -26,11 +32,15 @@ export default (Base) => {
             if (targetAnimation === currentState) return;
 
             if (currentState.transitions && currentState.transitions[targetName]) {
-                this.animation.state = currentConfig[currentState.transitions[targetName]];
+                const transitionAnimation = currentConfig[currentState.transitions[targetName]];
+                this.animation.state = transitionAnimation;
+                this.animation.nextAnimation = transitionAnimation.onEnd;
             } else {
                 this.animation.state = targetAnimation;
             }
+            this.animation.isReversed = isReversed;
             this.#resetIndex();
+            this.resetFrame();
         }
 
 
