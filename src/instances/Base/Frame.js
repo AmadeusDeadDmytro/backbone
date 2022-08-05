@@ -10,7 +10,7 @@ export default (Base) => {
         }
 
         checkFrame(callback) {
-            if (this.frame.count >= ANIMATION_FRAME_SPEED) {
+            if (this.frame.count >= ANIMATION_FRAME_SPEED || this.frame.count >= this.animation.state.speed) {
                 callback();
                 this.frame.count = 0;
             }

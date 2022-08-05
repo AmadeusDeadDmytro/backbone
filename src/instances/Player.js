@@ -51,6 +51,7 @@ export class Player extends classExtender(Frame, Animation) {
 
     move(time) {
         if (!this.isMoving) return;
+        if (this.animation.nextAnimation) return;
 
         if (this.toIdleTimeout) {
             clearTimeout(this.toIdleTimeout);

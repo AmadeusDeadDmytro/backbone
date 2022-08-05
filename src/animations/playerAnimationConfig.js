@@ -5,6 +5,7 @@
 * @horizontalOffset - offset for sprite if we need this
 * @transitions - transition animations
 * @onEnd - animation which must turn on when current is end
+* @speed - speed of animation, maximum is 10
 * */
 
 export default {
@@ -33,7 +34,7 @@ export default {
         },
         verticalCrop: 180,
         transitions: {
-            idleDirectional: "rotationReverse"
+            idleDirectional: "rotation"
         }
     },
     idleDirectional: {
@@ -44,7 +45,7 @@ export default {
         },
         verticalCrop: 270,
         transitions: {
-            idleDirectionalReverse: "rotation"
+            idleDirectionalReverse: "rotationReverse"
         }
     },
     rotation: {
@@ -54,7 +55,8 @@ export default {
             y: 86
         },
         verticalCrop: 360,
-        onEnd: "idleDirectional"
+        onEnd: "idleDirectional",
+        speed: 4
     },
     rotationReverse: {
         loop: [0, 1],
@@ -63,6 +65,7 @@ export default {
             y: 86
         },
         verticalCrop: 450,
-        onEnd: "idle"
+        onEnd: "idleDirectional",
+        speed: 4
     },
 };
