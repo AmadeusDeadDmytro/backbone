@@ -22,7 +22,7 @@ export class Player extends classExtender(Frame, Animation) {
         this.toIdleTimeout = null;
     }
 
-    update(passedTime) {
+    update(deltaTime) {
         if (!this.sprite) return;
 
         this.#drawFrame(
@@ -33,7 +33,7 @@ export class Player extends classExtender(Frame, Animation) {
         );
 
         this.frame.count++;
-        this.move(passedTime);
+        this.move(deltaTime);
         this.checkFrame(() => this.nextAnimationFrame());
 
     }
@@ -49,7 +49,7 @@ export class Player extends classExtender(Frame, Animation) {
         this.#startToIdleTimeout();
     }
 
-    move(time) {
+    move(deltaTime) {
         if (!this.isMoving) return;
         // TODO: Refactor this
         if (this.animation.nextAnimation) return;
@@ -57,7 +57,7 @@ export class Player extends classExtender(Frame, Animation) {
         if (this.toIdleTimeout) {
             clearTimeout(this.toIdleTimeout);
         }
-        this.offsetX += ((this.isRightDirection ? MOVEMENT_SPEED : -MOVEMENT_SPEED) * time);
+        this.offsetX += ((this.isRightDirection ? MOVEMENT_SPEED : -MOVEMENT_SPEED) * deltaTime);
     }
 
     #startToIdleTimeout() {
