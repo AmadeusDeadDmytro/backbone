@@ -19,7 +19,7 @@ export default (Base) => {
                     this.setAnimation(this.animation.nextAnimation, this.animation.isReversed);
                     this.animation.nextAnimation = null;
                 }
-                this.animation.index = 0;
+                this.#resetIndex();
             }
         }
 
