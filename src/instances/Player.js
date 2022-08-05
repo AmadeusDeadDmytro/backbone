@@ -29,7 +29,7 @@ export class Player extends classExtender(Frame, Animation) {
             this.animation.state.loop[this.animation.index],
             this.animation.state.verticalCrop,
             400 + (this.animation.state.horizontalOffset || 0) + this.offsetX,
-            window.innerHeight * 0.38
+            window.innerHeight - normalize(this.animation.state.size.y) - 150
         );
 
         this.frame.count++;

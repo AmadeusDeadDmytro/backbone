@@ -30,7 +30,6 @@ export default (Base) => {
             const targetAnimation = currentConfig[targetName];
 
             if (targetAnimation === currentState) return;
-            console.log(targetName);
             if (currentState.transitions && currentState.transitions[targetName]) {
                 const transitionAnimation = currentConfig[currentState.transitions[targetName]];
                 this.animation.state = transitionAnimation;

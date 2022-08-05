@@ -64,7 +64,7 @@ export default {
             x: 33,
             y: 86
         },
-        verticalCrop: 450,
+        verticalCrop: 448,
         onEnd: "idleDirectional",
         speed: 4
     },
